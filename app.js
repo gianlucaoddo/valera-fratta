@@ -18,12 +18,20 @@ function showSection(section){
   document.getElementById(section).style.display = 'block';
 }
 
-function exportCSV(){
-  var csvContent = "data:text/csv;charset=utf-8,Nome,Presenze\nRossi Marco,10\nBianchi Luca,8";
-  var encodedUri = encodeURI(csvContent);
-  var link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "statistiche.csv");
-  document.body.appendChild(link);
-  link.click();
+function inserisciGiocatore(){
+  var nome = document.getElementById('nomeGiocatore').value;
+  var li = document.createElement('li');
+  li.textContent = nome;
+  document.getElementById('listaGiocatori').appendChild(li);
+  document.getElementById('nomeGiocatore').value = '';
+}
+
+function inserisciPartita(){
+  var avv = document.getElementById('avversario').value;
+  var data = document.getElementById('dataPartita').value;
+  var li = document.createElement('li');
+  li.textContent = data + ' vs ' + avv;
+  document.getElementById('listaPartite').appendChild(li);
+  document.getElementById('avversario').value = '';
+  document.getElementById('dataPartita').value = '';
 }
