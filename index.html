@@ -7,12 +7,42 @@
 </head>
 <body>
   <h1>Valera Fratta Convocazioni</h1>
-  <img src="logo.png" alt="Logo Valera Fratta" width="150">
-
   <h2>Login</h2>
   <input type="text" placeholder="Username" id="user"><br>
   <input type="password" placeholder="Password" id="pass"><br>
   <button onclick="login()">Login</button>
+
+  <div id="dashboard" style="display:none;">
+    <h2>Dashboard</h2>
+    <button onclick="showSection('giocatori')">Giocatori</button>
+    <button onclick="showSection('partite')">Partite</button>
+    <button onclick="showSection('convocazioni')">Convocazioni</button>
+    <button onclick="exportCSV()">Export CSV</button>
+
+    <div id="giocatori" class="section" style="display:none;">
+      <h3>Giocatori</h3>
+      <ul>
+        <li>Rossi Marco</li>
+        <li>Bianchi Luca</li>
+      </ul>
+    </div>
+
+    <div id="partite" class="section" style="display:none;">
+      <h3>Partite</h3>
+      <ul>
+        <li>Valera vs Team A</li>
+        <li>Valera vs Team B</li>
+      </ul>
+    </div>
+
+    <div id="convocazioni" class="section" style="display:none;">
+      <h3>Convocazioni</h3>
+      <ul>
+        <li>Rossi Marco convocato</li>
+        <li>Bianchi Luca convocato</li>
+      </ul>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
