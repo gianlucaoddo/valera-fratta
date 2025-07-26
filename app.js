@@ -1,7 +1,7 @@
 
 document.querySelectorAll('.toggle').forEach(button => {
     button.addEventListener('click', () => {
-        const list = button.nextElementSibling;
-        list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+        const details = button.nextElementSibling;
+        details.style.display = details.style.display === 'block' ? 'none' : 'block';
     });
 });

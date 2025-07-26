@@ -6,26 +6,56 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Convocazioni Partite</h1>
-
+    <h1>Convocazioni - Valera Fratta</h1>
+    <div id="matches">
         <div class="match">
-            <button class="toggle">Partita vs Real Madrid - 28/07/2025</button>
-            <ul class="players">
-                <li>✅ Rossi Marco</li>
-                <li>✅ Bianchi Luca</li>
-                <li>✅ Verdi Paolo</li>
-            </ul>
+            <button class="toggle">Partita 1: Valera vs Rivale (20/09/2025)</button>
+            <div class="details">
+                <h3>Convocati:</h3>
+                <ul>
+                    <li>Mario Rossi - 60 min - ⚽ 1 - 🟨</li>
+                    <li>Luca Bianchi - 30 min - 🔁 IN</li>
+                    <li>Andrea Verdi - 45 min - 🔁 OUT - 🟥</li>
+                </ul>
+                <h3>Cambi:</h3>
+                <ul>
+                    <li>🔁 45' - Verdi OUT, Bianchi IN</li>
+                </ul>
+                <h3>Cartellini:</h3>
+                <ul>
+                    <li>🟨 12' - Rossi</li>
+                    <li>🟥 60' - Verdi</li>
+                </ul>
+            </div>
         </div>
-
         <div class="match">
-            <button class="toggle">Partita vs Milan - 02/08/2025</button>
-            <ul class="players">
-                <li>✅ Neri Giacomo</li>
-                <li>✅ Gialli Andrea</li>
-            </ul>
+            <button class="toggle">Partita 2: Valera vs Altro Team (27/09/2025)</button>
+            <div class="details">
+                <h3>Convocati:</h3>
+                <ul>
+                    <li>Marco Neri - 90 min - ⚽ 2</li>
+                    <li>Franco Gialli - 90 min</li>
+                </ul>
+                <h3>Cambi:</h3>
+                <ul><li>Nessun cambio</li></ul>
+                <h3>Cartellini:</h3>
+                <ul><li>Nessun cartellino</li></ul>
+            </div>
         </div>
     </div>
+
+    <h2>Riepilogo Statistiche</h2>
+    <table>
+        <thead>
+            <tr><th>Giocatore</th><th>Minuti</th><th>Gol</th><th>Gialli</th><th>Rossi</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Mario Rossi</td><td>60</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>Andrea Verdi</td><td>45</td><td>0</td><td>0</td><td>1</td></tr>
+            <tr><td>Luca Bianchi</td><td>30</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>Marco Neri</td><td>90</td><td>2</td><td>0</td><td>0</td></tr>
+        </tbody>
+    </table>
 
     <script src="app.js"></script>
 </body>
