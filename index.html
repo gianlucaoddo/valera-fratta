@@ -1,51 +1,32 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-  <title>Valera Fratta Gestionale</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Convocazioni Valera Fratta</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Valera Fratta Gestionale Convocazioni</h1>
+    <div class="container">
+        <h1>Convocazioni Partite</h1>
 
-  <h2>Login</h2>
-  <input type="text" placeholder="Username" id="user"><br>
-  <input type="password" placeholder="Password" id="pass"><br>
-  <button onclick="login()">Login</button>
+        <div class="match">
+            <button class="toggle">Partita vs Real Madrid - 28/07/2025</button>
+            <ul class="players">
+                <li>✅ Rossi Marco</li>
+                <li>✅ Bianchi Luca</li>
+                <li>✅ Verdi Paolo</li>
+            </ul>
+        </div>
 
-  <div id="dashboard" style="display:none;">
-    <h2>Dashboard</h2>
-    <button onclick="showSection('giocatori')">Gestione Giocatori</button>
-    <button onclick="showSection('partite')">Gestione Partite</button>
-    <button onclick="showSection('convocazioni')">Gestione Convocazioni</button>
-    <button onclick="showSection('eventi')">Gestione Eventi Partita</button>
-
-    <div id="giocatori" class="section" style="display:none;">
-      <h3>Inserisci Giocatore</h3>
-      <input type="text" placeholder="Nome giocatore" id="nomeGiocatore">
-      <button onclick="inserisciGiocatore()">Inserisci</button>
-      <ul id="listaGiocatori"></ul>
+        <div class="match">
+            <button class="toggle">Partita vs Milan - 02/08/2025</button>
+            <ul class="players">
+                <li>✅ Neri Giacomo</li>
+                <li>✅ Gialli Andrea</li>
+            </ul>
+        </div>
     </div>
 
-    <div id="partite" class="section" style="display:none;">
-      <h3>Inserisci Partita</h3>
-      <input type="text" placeholder="Avversario" id="avversario">
-      <input type="date" id="dataPartita">
-      <button onclick="inserisciPartita()">Inserisci</button>
-      <ul id="listaPartite"></ul>
-    </div>
-
-    <div id="convocazioni" class="section" style="display:none;">
-      <h3>Convocazioni</h3>
-      <p>Struttura ad albero (Partita ➔ Giocatori convocati) placeholder demo</p>
-    </div>
-
-    <div id="eventi" class="section" style="display:none;">
-      <h3>Eventi Partita</h3>
-      <p>Placeholder inserimento goal, minuti, cambi, cartellini gialli/rossi, espulsioni</p>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
