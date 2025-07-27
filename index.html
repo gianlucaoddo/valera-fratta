@@ -1,62 +1,106 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Convocazioni Valera Fratta</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Valera Fratta - Convocazioni</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .logo { max-width: 200px; }
+    table, th, td { border: 1px solid #ccc; border-collapse: collapse; padding: 5px; }
+    table { width: 100%; margin-top: 20px; }
+    .button-group { margin-top: 20px; }
+    button { margin-right: 10px; }
+  </style>
 </head>
 <body>
-    <h1>Convocazioni - Valera Fratta</h1>
-    <div id="matches">
-        <div class="match">
-            <button class="toggle">Partita 1: Valera vs Rivale (20/09/2025)</button>
-            <div class="details">
-                <h3>Convocati:</h3>
-                <ul>
-                    <li>Mario Rossi - 60 min - ⚽ 1 - 🟨</li>
-                    <li>Luca Bianchi - 30 min - 🔁 IN</li>
-                    <li>Andrea Verdi - 45 min - 🔁 OUT - 🟥</li>
-                </ul>
-                <h3>Cambi:</h3>
-                <ul>
-                    <li>🔁 45' - Verdi OUT, Bianchi IN</li>
-                </ul>
-                <h3>Cartellini:</h3>
-                <ul>
-                    <li>🟨 12' - Rossi</li>
-                    <li>🟥 60' - Verdi</li>
-                </ul>
-            </div>
-        </div>
-        <div class="match">
-            <button class="toggle">Partita 2: Valera vs Altro Team (27/09/2025)</button>
-            <div class="details">
-                <h3>Convocati:</h3>
-                <ul>
-                    <li>Marco Neri - 90 min - ⚽ 2</li>
-                    <li>Franco Gialli - 90 min</li>
-                </ul>
-                <h3>Cambi:</h3>
-                <ul><li>Nessun cambio</li></ul>
-                <h3>Cartellini:</h3>
-                <ul><li>Nessun cartellino</li></ul>
-            </div>
-        </div>
-    </div>
+  <img src="logo-valera-fratta.png" alt="Logo Valera Fratta" class="logo">
+  <h1>Gestione Convocazioni - Valera Fratta</h1>
 
-    <h2>Riepilogo Statistiche</h2>
-    <table>
-        <thead>
-            <tr><th>Giocatore</th><th>Minuti</th><th>Gol</th><th>Gialli</th><th>Rossi</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>Mario Rossi</td><td>60</td><td>1</td><td>1</td><td>0</td></tr>
-            <tr><td>Andrea Verdi</td><td>45</td><td>0</td><td>0</td><td>1</td></tr>
-            <tr><td>Luca Bianchi</td><td>30</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>Marco Neri</td><td>90</td><td>2</td><td>0</td><td>0</td></tr>
-        </tbody>
-    </table>
+  <label>Partita:</label>
+  <input type="text" id="matchInput" placeholder="Es. Valera - Rivale"><br><br>
 
-    <script src="app.js"></script>
+  <label>Giocatore convocato:</label>
+  <input type="text" id="playerInput" placeholder="Nome Giocatore">
+  <button onclick="addPlayer()">Aggiungi</button>
+
+  <table id="convocationTable">
+    <thead>
+      <tr>
+        <th>Partita</th>
+        <th>Giocatore</th>
+        <th>Minuti</th>
+        <th>Cambi</th>
+        <th>Ammonizioni</th>
+        <th>Espulsioni</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="button-group">
+    <button onclick="downloadCSV()">Scarica XLS (CSV)</button>
+    <button onclick="downloadPDF()">Scarica PDF</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    const convocations = [];
+
+    function addPlayer() {
+      const match = document.getElementById('matchInput').value;
+      const player = document.getElementById('playerInput').value;
+      if (!match || !player) return alert("Inserisci tutti i campi");
+
+      const row = { match, player, minuti: 90, cambi: 0, amm: 0, esp: 0 };
+      convocations.push(row);
+      updateTable();
+      saveLocal();
+    }
+
+    function updateTable() {
+      const tbody = document.querySelector("#convocationTable tbody");
+      tbody.innerHTML = "";
+      convocations.forEach(row => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${row.match}</td>
+            <td>${row.player}</td>
+            <td>${row.minuti}</td>
+            <td>${row.cambi}</td>
+            <td>${row.amm}</td>
+            <td>${row.esp}</td>
+          </tr>`;
+      });
+    }
+
+    function downloadCSV() {
+      let csv = "Partita,Giocatore,Minuti,Cambi,Ammonizioni,Espulsioni\n";
+      convocations.forEach(row => {
+        csv += `${row.match},${row.player},${row.minuti},${row.cambi},${row.amm},${row.esp}\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "convocazioni.csv";
+      a.click();
+    }
+
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text("Convocazioni Valera Fratta", 10, 10);
+      let y = 20;
+      convocations.forEach(row => {
+        doc.text(`${row.match} - ${row.player} - Minuti: ${row.minuti}, Cambi: ${row.cambi}, Amm: ${row.amm}, Esp: ${row.esp}`, 10, y);
+        y += 10;
+      });
+      doc.save("convocazioni.pdf");
+    }
+
+    function saveLocal() {
+      localStorage.setItem("convocazioni", JSON.stringify(convocations));
+    }
+  </script>
 </body>
 </html>
