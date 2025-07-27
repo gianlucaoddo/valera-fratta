@@ -2,105 +2,47 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Valera Fratta - Convocazioni</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .logo { max-width: 200px; }
-    table, th, td { border: 1px solid #ccc; border-collapse: collapse; padding: 5px; }
-    table { width: 100%; margin-top: 20px; }
-    .button-group { margin-top: 20px; }
-    button { margin-right: 10px; }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valera Fratta - Convocazioni</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <img src="logo-valera-fratta.png" alt="Logo Valera Fratta" class="logo">
-  <h1>Gestione Convocazioni - Valera Fratta</h1>
+    <header>
+        <img src="logo.png" alt="Logo Valera Fratta" class="logo" />
+        <h1>Convocazioni Valera Fratta</h1>
+    </header>
 
-  <label>Partita:</label>
-  <input type="text" id="matchInput" placeholder="Es. Valera - Rivale"><br><br>
+    <main>
+        <section id="seleziona-squadra">
+            <h2>Seleziona squadra</h2>
+            <select id="squadraSelect">
+                <option>Under 21</option>
+                <option>Prima Squadra</option>
+            </select>
+        </section>
 
-  <label>Giocatore convocato:</label>
-  <input type="text" id="playerInput" placeholder="Nome Giocatore">
-  <button onclick="addPlayer()">Aggiungi</button>
+        <section id="gestione-partite">
+            <h2>Partite</h2>
+            <input type="text" id="nomePartita" placeholder="Es. 21/09 vs Rivale FC" />
+            <button onclick="aggiungiPartita()">Aggiungi Partita</button>
+            <ul id="listaPartite"></ul>
+        </section>
 
-  <table id="convocationTable">
-    <thead>
-      <tr>
-        <th>Partita</th>
-        <th>Giocatore</th>
-        <th>Minuti</th>
-        <th>Cambi</th>
-        <th>Ammonizioni</th>
-        <th>Espulsioni</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+        <section id="convocazioni">
+            <h2>Convocati</h2>
+            <input type="text" id="nomeGiocatore" placeholder="Nome giocatore" />
+            <button onclick="aggiungiGiocatore()">Aggiungi Convocato</button>
+            <ul id="listaConvocati"></ul>
+        </section>
 
-  <div class="button-group">
-    <button onclick="downloadCSV()">Scarica XLS (CSV)</button>
-    <button onclick="downloadPDF()">Scarica PDF</button>
-  </div>
+        <section id="esporta">
+            <h2>Esporta dati</h2>
+            <button onclick="esportaCSV()">Scarica XLS</button>
+            <button onclick="window.print()">Stampa / Salva PDF</button>
+        </section>
+    </main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script>
-    const convocations = [];
-
-    function addPlayer() {
-      const match = document.getElementById('matchInput').value;
-      const player = document.getElementById('playerInput').value;
-      if (!match || !player) return alert("Inserisci tutti i campi");
-
-      const row = { match, player, minuti: 90, cambi: 0, amm: 0, esp: 0 };
-      convocations.push(row);
-      updateTable();
-      saveLocal();
-    }
-
-    function updateTable() {
-      const tbody = document.querySelector("#convocationTable tbody");
-      tbody.innerHTML = "";
-      convocations.forEach(row => {
-        tbody.innerHTML += `
-          <tr>
-            <td>${row.match}</td>
-            <td>${row.player}</td>
-            <td>${row.minuti}</td>
-            <td>${row.cambi}</td>
-            <td>${row.amm}</td>
-            <td>${row.esp}</td>
-          </tr>`;
-      });
-    }
-
-    function downloadCSV() {
-      let csv = "Partita,Giocatore,Minuti,Cambi,Ammonizioni,Espulsioni\n";
-      convocations.forEach(row => {
-        csv += `${row.match},${row.player},${row.minuti},${row.cambi},${row.amm},${row.esp}\n`;
-      });
-      const blob = new Blob([csv], { type: "text/csv" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "convocazioni.csv";
-      a.click();
-    }
-
-    function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.text("Convocazioni Valera Fratta", 10, 10);
-      let y = 20;
-      convocations.forEach(row => {
-        doc.text(`${row.match} - ${row.player} - Minuti: ${row.minuti}, Cambi: ${row.cambi}, Amm: ${row.amm}, Esp: ${row.esp}`, 10, y);
-        y += 10;
-      });
-      doc.save("convocazioni.pdf");
-    }
-
-    function saveLocal() {
-      localStorage.setItem("convocazioni", JSON.stringify(convocations));
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
