@@ -4,45 +4,32 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Valera Fratta - Convocazioni</title>
+    <title>Valera Fratta - Gestione Squadra</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Logo Valera Fratta" class="logo" />
-        <h1>Convocazioni Valera Fratta</h1>
+        <img src="logo.png" alt="Logo Valera Fratta" class="logo">
+        <h1>Valera Fratta - Portale Convocazioni</h1>
     </header>
-
     <main>
-        <section id="seleziona-squadra">
-            <h2>Seleziona squadra</h2>
-            <select id="squadraSelect">
-                <option>Under 21</option>
-                <option>Prima Squadra</option>
-            </select>
+        <section id="squadre">
+            <h2>Gestione Rose</h2>
+            <button onclick="aggiungiGiocatore()">Aggiungi Giocatore</button>
+            <ul id="listaGiocatori"></ul>
         </section>
-
-        <section id="gestione-partite">
-            <h2>Partite</h2>
-            <input type="text" id="nomePartita" placeholder="Es. 21/09 vs Rivale FC" />
-            <button onclick="aggiungiPartita()">Aggiungi Partita</button>
+        <section id="partite">
+            <h2>Gestione Partite</h2>
+            <button onclick="aggiungiPartita()">Nuova Partita</button>
             <ul id="listaPartite"></ul>
         </section>
-
-        <section id="convocazioni">
-            <h2>Convocati</h2>
-            <input type="text" id="nomeGiocatore" placeholder="Nome giocatore" />
-            <button onclick="aggiungiGiocatore()">Aggiungi Convocato</button>
-            <ul id="listaConvocati"></ul>
-        </section>
-
-        <section id="esporta">
-            <h2>Esporta dati</h2>
-            <button onclick="esportaCSV()">Scarica XLS</button>
-            <button onclick="window.print()">Stampa / Salva PDF</button>
+        <section id="riepilogo">
+            <h2>Riepilogo Statistiche</h2>
+            <button onclick="scaricaCSV()">Scarica Excel</button>
+            <button onclick="scaricaPDF()">Scarica PDF</button>
+            <div id="tabellaStatistiche"></div>
         </section>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>
